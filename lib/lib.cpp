@@ -36,14 +36,6 @@ namespace {
             matrix[0].swap(matrix[1]);
         }
 
-        // for (auto vec : matrix){
-        //     for(double x : vec){
-        //         cout << x << " ";
-        //     }
-        //     cout << endl;
-        // }
-        // cout << endl;
-
         matrix[0] = matrix[0] / matrix[0][0]; // делаем первую строку вида 1.0 double double
         matrix[1] = matrix[1] - matrix[0] * matrix[1][0]; // вычитание из второй строки первую, чтобы получилось 0 double double
         if (abs(matrix[1][1]) < 1e-6){ // на случай если матрица 2х3 не решаема
@@ -53,25 +45,8 @@ namespace {
                 return false; // вся матрица не решаема
         }
 
-        // for (auto vec : matrix){
-        //     for(double x : vec){
-        //         cout << x << " ";
-        //     }
-        //     cout << endl;
-        // }
-        // cout << endl;
-
         matrix[1] = matrix[1] / matrix[1][1];
         matrix[0] = matrix[0] - matrix[1] * matrix[0][1];
-
-
-        // for (auto vec : matrix){
-        //     for(double x : vec){
-        //         cout << x << " ";
-        //     }
-        //     cout << endl;
-        // }
-        // cout << endl;
 
         t = matrix[0][2];
         s = matrix[1][2];
@@ -98,14 +73,6 @@ bool Intersect::Intersect(const Segment3D& line1, const Segment3D& line2, Vector
     vector<vector<double>> matrix = {{p2.getx() - p1.getx(), p3.getx() - p4.getx(), p3.getx() - p1.getx()},
                                     {p2.gety() - p1.gety(), p3.gety() - p4.gety(), p3.gety() - p1.gety()},
                                     {p2.getz() - p1.getz(), p3.getz() - p4.getz(), p3.getz() - p1.getz()}};
-    
-    // for (auto vec : matrix){
-    //     for(double x : vec){
-    //         cout << x << " ";
-    //     }
-    //     cout << endl;
-    // }
-    // cout << endl;
 
     double t, s;
     if (!solve(matrix, t, s))
