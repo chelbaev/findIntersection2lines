@@ -25,7 +25,7 @@ namespace {
             result.push_back(vec1[i] - vec2[i]);
         return result;
     }
-
+// тут решение системы линейных уравнений. по сути у нас матрицы 2x3 только нужна, но у нас есть ещё третия строка, поэтому я её тоже переодически буду использовать, когда решений не будет
     bool solve (vector<vector<double>> matrix, double &t, double &s){
         if (abs(matrix[0][0]) < 1e-6){
             if (abs(matrix[1][0]) < 1e-6){
@@ -74,9 +74,11 @@ bool Intersect::Intersect(const Segment3D& line1, const Segment3D& line2, Vector
                                     {p2.gety() - p1.gety(), p3.gety() - p4.gety(), p3.gety() - p1.gety()},
                                     {p2.getz() - p1.getz(), p3.getz() - p4.getz(), p3.getz() - p1.getz()}};
 
+    // тут я решаю систему линейных уравнений
     double t, s;
     if (!solve(matrix, t, s))
         return false;
+    // по какой-то причине найденое решение может быть не верным, поэтому нужна проверка. Во всяком случае если будетесли решение системы не будет найдено, то его и не будет
     Vector3D tmp;
     tmp.setx(int((s * (p4.getx() - p3.getx()) + p3.getx()) * 1000000) / 1000000.0);
     tmp.sety(int((s * (p4.gety() - p3.gety()) + p3.gety()) * 1000000) / 1000000.0);
